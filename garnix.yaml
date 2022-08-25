@@ -1,0 +1,5 @@
+builds:
+  include:
+    - 'packages.aarch64-darwin.*'
+    - 'devShells.aarch64-darwin.*'
+  exclude: []
