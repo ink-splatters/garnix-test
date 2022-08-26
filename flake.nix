@@ -8,30 +8,20 @@
     treefmt-flake.url = "github:srid/treefmt-flake";
   };
 
-  outputs = { self, flake-parts, treefmt-flake,... }:
+  outputs = { self, flake-parts, treefmt-flake, ... }:
     flake-parts.lib.mkFlake { inherit self; } {
 
-      imports = [ 
-        treefmt-flake.flakeModule
-      ];
+      imports = [ treefmt-flake.flakeModule ];
 
       systems = [ "x86_64-linux" "aarch64-darwin" ];
 
       perSystem = { config, self', inputs', pkgs, system, ... }: {
 
-	packages = let inherit (pkgs) hello; in
-		{
-			default = hello;
-			hello = hello;
-		};
+        packages = let inherit (pkgs) hello; in hello // { default = hello; };
 
-#	      devShells.default = import ./shell.nix
+        #	      devShells.default = import ./shell.nix
       };
 
-
-
-  };
+    };
 }
-
-
 
